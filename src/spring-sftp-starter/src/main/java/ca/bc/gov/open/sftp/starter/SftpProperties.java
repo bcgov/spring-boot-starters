@@ -7,7 +7,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  *
  * @author alexjoybc@github
  */
-@ConfigurationProperties(prefix = "starter.sftp")
+@ConfigurationProperties(prefix = "bcgov.sftp")
 public class SftpProperties {
 
     private String host;
