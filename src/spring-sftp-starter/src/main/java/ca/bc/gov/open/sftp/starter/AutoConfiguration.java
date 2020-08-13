@@ -5,6 +5,7 @@ import com.jcraft.jsch.JSchException;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -35,6 +36,7 @@ public class AutoConfiguration {
      * @throws JSchException
      */
     @Bean
+    @ConditionalOnMissingBean(JSch.class)
     public JSch sftpSession(SftpProperties sftpProperties) throws JSchException {
 
         JSch jsch = new JSch();
