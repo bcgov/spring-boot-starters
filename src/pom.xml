@@ -5,7 +5,7 @@
 
     <groupId>ca.bc.gov.open</groupId>
     <artifactId>spring-starters</artifactId>
-    <version>0.1.1-SNAPSHOT</version>
+    <version>0.1.1</version>
 
     <name>spring-starters</name>
     <packaging>pom</packaging>
