@@ -15,13 +15,17 @@ import java.util.Vector;
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class SftpServiceImplListFileTest {
 
+
+    private static final String CASE_2 = "case2";
+    private static final String CASE_3 = "case2";
+    private static final String CASE_1 = "case1";
+
     private static final String FILENAME_1 = "filename1";
     private static final String FILENAME_2 = "filename2";
     private static final String FILENAME_3 = "filename3";
-    private static final String CASE_2 = "case2";
-    private static final String REMOTE = "remote";
-    private static String CASE_1 = "case1";
 
+    private static final String REMOTE = "remote";
+    private static final String TEST_WINDOWS = "test\\windows";
 
     @Mock
     private JschSessionProvider jschSessionProviderMock;
@@ -69,7 +73,9 @@ public class SftpServiceImplListFileTest {
         fakeList2.add(lsEntry2Mock);
         fakeList2.add(lsEntry3Mock);
 
-        Mockito.when(channelSftpMock.ls(REMOTE + "\\" +CASE_2)).thenReturn(fakeList2);
+        Mockito.when(channelSftpMock.ls(REMOTE + "/" +CASE_2)).thenReturn(fakeList2);
+
+        Mockito.when(channelSftpMock.ls(  "test/windows/" +CASE_3)).thenReturn(fakeList2);
 
         Mockito.when(channelSftpMock.isConnected()).thenReturn(true);
 
@@ -95,6 +101,20 @@ public class SftpServiceImplListFileTest {
         Mockito.when(sftpPropertiesMock.getRemoteLocation()).thenReturn(REMOTE);
 
         List<String> actual =  sut.listFiles(CASE_2);
+
+        Assertions.assertEquals(3, actual.size());
+        Assertions.assertTrue(actual.contains(FILENAME_1));
+        Assertions.assertTrue(actual.contains(FILENAME_2));
+
+    }
+
+    @Test
+    @DisplayName("Success - Test with valid remote file name windows like list and remote location set")
+    public void withRemoteLocationSetAsWindowsListShouldReturnAListOfFileName() {
+
+        Mockito.when(sftpPropertiesMock.getRemoteLocation()).thenReturn(TEST_WINDOWS);
+
+        List<String> actual =  sut.listFiles(CASE_3);
 
         Assertions.assertEquals(3, actual.size());
         Assertions.assertTrue(actual.contains(FILENAME_1));

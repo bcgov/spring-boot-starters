@@ -4,11 +4,16 @@ import com.jcraft.jsch.ChannelSftp;
 import com.jcraft.jsch.JSchException;
 import com.jcraft.jsch.Session;
 import com.jcraft.jsch.SftpException;
+import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.*;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
@@ -159,11 +164,11 @@ public class SftpServiceImpl implements SftpService {
         }
     }
 
-    private String getFilePath(String remoteFilename) {
-        return
-                StringUtils.isNotBlank(sftpProperties.getRemoteLocation()) ?
-                        new File(sftpProperties.getRemoteLocation(), remoteFilename).getPath() :
-                        new File(remoteFilename).getPath();
+    private String getFilePath(String remotePath) {
+
+        return FilenameUtils.separatorsToUnix(StringUtils.isNotBlank(sftpProperties.getRemoteLocation()) ?
+                        Paths.get(sftpProperties.getRemoteLocation(), remotePath).toString() :
+                        Paths.get(remotePath).toString());
     }
 
 }
