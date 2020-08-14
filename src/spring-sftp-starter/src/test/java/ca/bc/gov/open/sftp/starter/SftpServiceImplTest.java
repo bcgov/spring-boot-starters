@@ -61,7 +61,8 @@ public class SftpServiceImplTest {
         Mockito.when(channelSftpMock.get(CASE_4)).thenReturn(null);
         Mockito.when(channelSftpMock.isConnected()).thenReturn(true);
 
-        sut = new SftpServiceImpl(jschSessionProviderMock);
+        SftpProperties sftpProperties = new SftpProperties();
+        sut = new SftpServiceImpl(jschSessionProviderMock, sftpProperties);
     }
 
     @Test
