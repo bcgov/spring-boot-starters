@@ -4,13 +4,11 @@ import com.jcraft.jsch.ChannelSftp;
 import com.jcraft.jsch.JSchException;
 import com.jcraft.jsch.Session;
 import com.jcraft.jsch.SftpException;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
@@ -22,15 +20,21 @@ public class SftpServiceImpl implements SftpService {
     }
 
     public static final int BUFFER_SIZE = 8000;
+
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     private final JschSessionProvider jschSessionProvider;
 
-    public SftpServiceImpl(JschSessionProvider jschSessionProvider) {
+    private final SftpProperties sftpProperties;
+
+    public SftpServiceImpl(JschSessionProvider jschSessionProvider, SftpProperties sftpProperties) {
         this.jschSessionProvider = jschSessionProvider;
+        this.sftpProperties = sftpProperties;
     }
 
     public ByteArrayInputStream getContent(String remoteFilename) {
+
+        String sftpRemoteFilename = getFilePath(remoteFilename);
 
         ByteArrayInputStream result = null;
         byte[] buff = new byte[BUFFER_SIZE];
@@ -44,9 +48,9 @@ public class SftpServiceImpl implements SftpService {
 
                     int bytesRead;
 
-                    logger.debug("Attempting to get remote file [{}]", remoteFilename);
-                    InputStream inputStream = channelSftp.get(remoteFilename);
-                    logger.debug("Successfully get remote file [{}]", remoteFilename);
+                    logger.debug("Attempting to get remote file [{}]", sftpRemoteFilename);
+                    InputStream inputStream = channelSftp.get(sftpRemoteFilename);
+                    logger.debug("Successfully get remote file [{}]", sftpRemoteFilename);
 
                     while ((bytesRead = inputStream.read(buff)) != -1) {
                         bao.write(buff, 0, bytesRead);
@@ -79,10 +83,13 @@ public class SftpServiceImpl implements SftpService {
      */
     public void moveFile(String remoteFileName, String destinationFilename) {
 
+        String sftpRemoteFilename = getFilePath(remoteFileName);
+        String sftpDestinationFilename = getFilePath(destinationFilename);
+
         executeSftpFunction(channelSftp -> {
-                channelSftp.rename(remoteFileName, destinationFilename);
-                logger.debug("Successfully renamed files on the sftp server from {} to {}", remoteFileName,
-                        destinationFilename);
+                channelSftp.rename(sftpRemoteFilename, sftpDestinationFilename);
+                logger.debug("Successfully renamed files on the sftp server from {} to {}", sftpRemoteFilename,
+                        sftpDestinationFilename);
         });
 
     }
@@ -90,10 +97,13 @@ public class SftpServiceImpl implements SftpService {
     @Override
     public void put(InputStream inputStream, String remoteFileName) {
 
+        String sftpRemoteFilename = getFilePath(remoteFileName);
+
         executeSftpFunction(channelSftp -> {
-                channelSftp.put(inputStream, remoteFileName);
-                logger.debug("Successfully uploadeed file [{}]", remoteFileName);
+                channelSftp.put(inputStream, sftpRemoteFilename);
+                logger.debug("Successfully uploaded file [{}]", remoteFileName);
         });
+
     }
 
     /**
@@ -104,10 +114,12 @@ public class SftpServiceImpl implements SftpService {
     @Override
     public List<String> listFiles(String remoteDirectory) {
 
+        String sftpRemoteDirectory = getFilePath(remoteDirectory);
+
         List<String> result = new ArrayList<>();
 
         executeSftpFunction(channelSftp -> {
-            Vector fileList = channelSftp.ls(remoteDirectory);
+            Vector fileList = channelSftp.ls(sftpRemoteDirectory);
 
             for(int i = 0; i < fileList.size(); i++) {
                 logger.debug("Attempting to list files in [{}]", remoteDirectory);
@@ -147,7 +159,11 @@ public class SftpServiceImpl implements SftpService {
         }
     }
 
-
-
+    private String getFilePath(String remoteFilename) {
+        return
+                StringUtils.isNotBlank(sftpProperties.getRemoteLocation()) ?
+                        new File(sftpProperties.getRemoteLocation(), remoteFilename).getPath() :
+                        new File(remoteFilename).getPath();
+    }
 
 }

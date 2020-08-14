@@ -62,7 +62,7 @@ public class AutoConfiguration {
      */
     @Bean
     public SftpService sftpService(JschSessionProvider jschSessionProvider) {
-        return new SftpServiceImpl(jschSessionProvider);
+        return new SftpServiceImpl(jschSessionProvider, sftpProperties);
     }
 
 
