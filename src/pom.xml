@@ -6,6 +6,9 @@
     <groupId>ca.bc.gov.open</groupId>
     <artifactId>spring-starters</artifactId>
     <version>0.1.1</version>
+    <modules>
+
+    </modules>
 
     <name>spring-starters</name>
     <packaging>pom</packaging>
@@ -20,8 +23,27 @@
             <id>all</id>
             <modules>
                 <module>spring-sftp-starter</module>
+                <module>spring-bceid-starter</module>
+                <module>spring-starters-bom</module>
             </modules>
         </profile>
+
+        <profile>
+            <id>spring-sftp-starter</id>
+            <modules>
+                <module>spring-starters-bom</module>
+                <module>spring-sftp-starter</module>
+            </modules>
+        </profile>
+
+        <profile>
+            <id>spring-bceid-starter</id>
+            <modules>
+                <module>spring-starters-bom</module>
+                <module>spring-bceid-starter</module>
+            </modules>
+        </profile>
+
     </profiles>
 
 </project>
