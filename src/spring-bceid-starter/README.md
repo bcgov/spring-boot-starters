@@ -2,6 +2,20 @@
 
 A stater to facilitate usage of bceid service.
 
+## Usage
+
+Add spring-bceid-starter as a maven dependency
+
+```xml
+ <dependencies>
+    <dependency>
+        <groupId>ca.bc.gov.open</groupId>
+        <artifactId>spring-bceid-starter</artifactId>
+        <version>0.1.2</version>
+    </dependency>
+</dependencies>
+```
+
 ## Configuration
 
 | name | definition | required |
