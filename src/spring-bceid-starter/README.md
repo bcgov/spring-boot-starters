@@ -35,7 +35,7 @@ Sets the BCeID service URI
 
 * Value type is String
 
-Sets the username used to set basic authentication on bceid service
+Sets the username used to set basic authentication on the BCeID service
 
 #### bcgov.bceid.service.password
 
