@@ -8,6 +8,7 @@ import ca.bceid.webservices.client.v9.*;
 import org.junit.jupiter.api.*;
 import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.mockito.MockitoAnnotations;
 
 import java.util.Optional;
 
@@ -41,6 +42,7 @@ public class BCeIDAccountServiceImplTest {
 
     @BeforeEach
     public void init() {
+        MockitoAnnotations.initMocks(this);
 
         sut = new BCeIDAccountServiceImpl(bCeIDServiceSoapMock, bCeIdPropertiesMock);
 
