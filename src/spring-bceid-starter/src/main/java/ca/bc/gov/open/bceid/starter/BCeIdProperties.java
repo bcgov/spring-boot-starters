@@ -8,6 +8,7 @@ public class BCeIdProperties {
     private String uri;
     private String username;
     private String password;
+    private String onlineServiceId;
 
     public String getUri() {
         return uri;
@@ -31,5 +32,13 @@ public class BCeIdProperties {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getOnlineServiceId() {
+        return onlineServiceId;
+    }
+
+    public void setOnlineServiceId(String onlineServiceId) {
+        this.onlineServiceId = onlineServiceId;
     }
 }

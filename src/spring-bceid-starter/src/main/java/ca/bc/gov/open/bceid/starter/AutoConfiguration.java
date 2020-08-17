@@ -1,7 +1,7 @@
 package ca.bc.gov.open.bceid.starter;
 
-import ca.bc.gov.open.bceid.starter.user.BCeIDUserService;
-import ca.bc.gov.open.bceid.starter.user.BCeIDUserServiceImpl;
+import ca.bc.gov.open.bceid.starter.account.BCeIDAccountService;
+import ca.bc.gov.open.bceid.starter.account.BCeIDAccountServiceImpl;
 import ca.bceid.webservices.client.v9.BCeIDServiceSoap;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.cxf.jaxws.JaxWsProxyFactoryBean;
@@ -34,7 +34,7 @@ public class AutoConfiguration {
     }
 
     @Bean
-    public BCeIDUserService bCeIDUserService(BCeIDServiceSoap bCeIDServiceSoap) {
-        return new BCeIDUserServiceImpl(bCeIDServiceSoap);
+    public BCeIDAccountService bCeIDUserService(BCeIDServiceSoap bCeIDServiceSoap) {
+        return new BCeIDAccountServiceImpl(bCeIDServiceSoap, bCeIdProperties);
     }
 }
