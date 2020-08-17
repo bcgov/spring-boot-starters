@@ -9,6 +9,7 @@ import ca.bc.gov.open.bceid.starter.account.mappers.IndividualIdentityMapperImpl
 import ca.bceid.webservices.client.v9.BCeIDServiceSoap;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.cxf.jaxws.JaxWsProxyFactoryBean;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -48,6 +49,7 @@ public class AutoConfiguration {
     }
 
     @Bean
+    @ConditionalOnMissingBean(BCeIDAccountService.class)
     public BCeIDAccountService bCeIDUserService(BCeIDServiceSoap bCeIDServiceSoap, AccountDetailRequestMapper accountDetailRequestMapper, IndividualIdentityMapper individualIdentityMapper) {
         return new BCeIDAccountServiceImpl(bCeIDServiceSoap, bCeIdProperties, accountDetailRequestMapper, individualIdentityMapper);
     }
