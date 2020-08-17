@@ -96,6 +96,8 @@ public class BCeIDAccountServiceImplTest {
         Assertions.assertEquals(PROVINCE, result.get().getMailingAddress().getProvince());
         Assertions.assertEquals(UNSTRUCTUREDADDRESS, result.get().getMailingAddress().getUnstructuredAddress());
 
+        Assertions.assertNotNull(result.get().getDateOfBirth());
+
     }
 
     @Test
