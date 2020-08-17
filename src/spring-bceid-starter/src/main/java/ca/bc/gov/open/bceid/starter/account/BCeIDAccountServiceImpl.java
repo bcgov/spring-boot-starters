@@ -45,7 +45,7 @@ public class BCeIDAccountServiceImpl implements BCeIDAccountService {
 
             Address residentialAddress = new Address(bresidentialAddress.getAddressLine1().getValue(),
                     bresidentialAddress.getAddressLine2().getValue(),
-                    bresidentialAddress.getCountry().getValue(),
+                    bresidentialAddress.getCity().getValue(),
                     bresidentialAddress.getPostal().getValue(),
                     bresidentialAddress.getProvince().getValue(),
                     bresidentialAddress.getCountry().getValue(),
@@ -55,7 +55,7 @@ public class BCeIDAccountServiceImpl implements BCeIDAccountService {
 
             Address mailingAddress = new Address(bmailingAddress.getAddressLine1().getValue(),
                     bmailingAddress.getAddressLine2().getValue(),
-                    bmailingAddress.getCountry().getValue(),
+                    bmailingAddress.getCity().getValue(),
                     bmailingAddress.getPostal().getValue(),
                     bmailingAddress.getProvince().getValue(),
                     bmailingAddress.getCountry().getValue(),
