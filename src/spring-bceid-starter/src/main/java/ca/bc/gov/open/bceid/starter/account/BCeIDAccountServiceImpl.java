@@ -1,6 +1,7 @@
 package ca.bc.gov.open.bceid.starter.account;
 
 import ca.bc.gov.open.bceid.starter.BCeIdProperties;
+import ca.bc.gov.open.bceid.starter.account.mappers.AccountDetailRequestMapper;
 import ca.bc.gov.open.bceid.starter.account.models.Address;
 import ca.bc.gov.open.bceid.starter.account.models.IndividualIdentity;
 import ca.bc.gov.open.bceid.starter.account.models.Name;
@@ -15,20 +16,19 @@ public class BCeIDAccountServiceImpl implements BCeIDAccountService {
 
     private final BCeIdProperties bCeIdProperties;
 
-    public BCeIDAccountServiceImpl(BCeIDServiceSoap bCeIDServiceSoap, BCeIdProperties bCeIdProperties) {
+    private final AccountDetailRequestMapper accountDetailRequestMapper;
+
+    public BCeIDAccountServiceImpl(BCeIDServiceSoap bCeIDServiceSoap, BCeIdProperties bCeIdProperties, AccountDetailRequestMapper accountDetailRequestMapper) {
         this.bCeIDServiceSoap = bCeIDServiceSoap;
         this.bCeIdProperties = bCeIdProperties;
+        this.accountDetailRequestMapper = accountDetailRequestMapper;
     }
 
     @Override
     public Optional<IndividualIdentity> getIndividualIdentity(GetAccountRequest request) {
 
-        AccountDetailRequest accountDetailRequest = new AccountDetailRequest();
-        accountDetailRequest.setOnlineServiceId(bCeIdProperties.getOnlineServiceId());
-        accountDetailRequest.setRequesterUserGuid(request.getId());
-        accountDetailRequest.setRequesterAccountTypeCode(request.getbCeIDAccountTypeCode());
-        accountDetailRequest.setUserGuid(request.getRequesterId());
-        accountDetailRequest.setAccountTypeCode(request.getRequesterBCeIDAccountTypeCode());
+        AccountDetailRequest accountDetailRequest = accountDetailRequestMapper.toAccountDetailRequest(request, bCeIdProperties.getOnlineServiceId());
+
         AccountDetailResponse response = bCeIDServiceSoap.getAccountDetail(accountDetailRequest);
 
         if (response.getCode() == ResponseCode.SUCCESS) {

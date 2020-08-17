@@ -41,7 +41,7 @@ public class AutoConfiguration {
     }
 
     @Bean
-    public BCeIDAccountService bCeIDUserService(BCeIDServiceSoap bCeIDServiceSoap) {
-        return new BCeIDAccountServiceImpl(bCeIDServiceSoap, bCeIdProperties);
+    public BCeIDAccountService bCeIDUserService(BCeIDServiceSoap bCeIDServiceSoap, AccountDetailRequestMapper accountDetailRequestMapper) {
+        return new BCeIDAccountServiceImpl(bCeIDServiceSoap, bCeIdProperties, accountDetailRequestMapper);
     }
 }

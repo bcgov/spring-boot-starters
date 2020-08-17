@@ -1,11 +1,12 @@
 package ca.bc.gov.open.bceid.starter.account;
 
 import ca.bc.gov.open.bceid.starter.BCeIdProperties;
-import ca.bc.gov.open.bceid.starter.account.models.Address;
+import ca.bc.gov.open.bceid.starter.account.mappers.AccountDetailRequestMapper;
+import ca.bc.gov.open.bceid.starter.account.mappers.AccountDetailRequestMapperImpl;
 import ca.bc.gov.open.bceid.starter.account.models.IndividualIdentity;
-import ca.bc.gov.open.bceid.starter.account.models.Name;
 import ca.bceid.webservices.client.v9.*;
 import org.junit.jupiter.api.*;
+import org.mockito.ArgumentMatchers;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
@@ -17,8 +18,6 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Optional;
-
-import static org.mockito.ArgumentMatchers.any;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @DisplayName("Test BCeIDAccountServiceImpl")
@@ -40,24 +39,37 @@ public class BCeIDAccountServiceImplTest {
     BCeIDAccountServiceImpl sut;
 
     @Mock
-    BCeIDServiceSoap bCeIDServiceSoapMock;
+    private BCeIDServiceSoap bCeIDServiceSoapMock;
 
     @Mock
-    BCeIdProperties bCeIdPropertiesMock;
+    private BCeIdProperties bCeIdPropertiesMock;
 
+    private AccountDetailRequestMapper accountDetailRequestMapper;
 
     @BeforeEach
     public void init() {
+
         MockitoAnnotations.initMocks(this);
 
-        sut = new BCeIDAccountServiceImpl(bCeIDServiceSoapMock, bCeIdPropertiesMock);
+        Mockito.doReturn(createAccountDetailsResponse(ResponseCode.SUCCESS))
+                .when(bCeIDServiceSoapMock)
+                .getAccountDetail(ArgumentMatchers.argThat(x -> x.getUserGuid().equals(SUCCESS) && x.getAccountTypeCode() == BCeIDAccountTypeCode.INDIVIDUAL));
+
+        Mockito
+                .doReturn(createAccountDetailsResponse(ResponseCode.FAILED))
+                .when(bCeIDServiceSoapMock)
+                .getAccountDetail(ArgumentMatchers.argThat(x -> x.getUserGuid().equals(FAILED)));
+
+        // Testing mapper as part of the test
+        accountDetailRequestMapper = new AccountDetailRequestMapperImpl();
+
+        sut = new BCeIDAccountServiceImpl(bCeIDServiceSoapMock, bCeIdPropertiesMock, accountDetailRequestMapper);
 
     }
 
     @Test
     @DisplayName("Test Return Individual Identity")
     public void withValidRequestReturnAccount() {
-        Mockito.when(bCeIDServiceSoapMock.getAccountDetail(any())).thenReturn(createAccountDetailsResponse(ResponseCode.SUCCESS));
 
         Optional<IndividualIdentity> result = sut.getIndividualIdentity(GetAccountRequest.IndividualSelfRequest(SUCCESS));
 
@@ -89,7 +101,7 @@ public class BCeIDAccountServiceImplTest {
     @Test
     @DisplayName("Test Return Failure")
     public void withValidRequestReturnFailure() {
-        Mockito.when(bCeIDServiceSoapMock.getAccountDetail(any())).thenReturn(createAccountDetailsResponse(ResponseCode.FAILED));
+
 
         Optional<IndividualIdentity> result = sut.getIndividualIdentity(GetAccountRequest.IndividualSelfRequest(FAILED));
 
