@@ -29,7 +29,7 @@ Add spring-bceid-starter as a maven dependency
 
 * Value type is String
 
-Sets the bceid service URI
+Sets the BCeID service URI
 
 #### bcgov.bceid.service.username
 
