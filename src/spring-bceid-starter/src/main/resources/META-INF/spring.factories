@@ -1,3 +1,2 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
   ca.bc.gov.open.bceid.starter.AutoConfiguration
-  
