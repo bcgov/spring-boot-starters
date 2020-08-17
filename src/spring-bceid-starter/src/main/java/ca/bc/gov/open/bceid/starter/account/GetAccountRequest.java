@@ -38,22 +38,47 @@ public class GetAccountRequest {
         return new GetAccountRequest(id, BCeIDAccountTypeCode.BUSINESS);
     }
 
+    /**
+     * Build a request EDS Federated Accounts
+     * @param id
+     * @return
+     */
     public static GetAccountRequest EdsSelfRequest(String id) {
         return new GetAccountRequest(id, BCeIDAccountTypeCode.EDS);
     }
 
+    /**
+     * Build a request for individual
+     * @param id
+     * @return
+     */
     public static GetAccountRequest IndividualSelfRequest(String id) {
         return new GetAccountRequest(id, BCeIDAccountTypeCode.INDIVIDUAL);
     }
 
+    /**
+     * Build a request for internal
+     * @param id
+     * @return
+     */
     public static GetAccountRequest InternalSelfRequest(String id) {
         return new GetAccountRequest(id, BCeIDAccountTypeCode.INTERNAL);
     }
 
+    /**
+     * Build a request for Liquor Distribution Branch Federated Accounts
+     * @param id
+     * @return
+     */
     public static GetAccountRequest LdbSelfRequest(String id) {
         return new GetAccountRequest(id, BCeIDAccountTypeCode.LDB);
     }
 
+    /**
+     * Build a request for Verified Individual.
+     * @param id
+     * @return
+     */
     public static GetAccountRequest VerifiedIndividualSelfRequest(String id) {
         return new GetAccountRequest(id, BCeIDAccountTypeCode.VERIFIED_INDIVIDUAL);
     }
