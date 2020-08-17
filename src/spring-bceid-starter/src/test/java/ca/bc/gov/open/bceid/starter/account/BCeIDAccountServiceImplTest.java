@@ -10,6 +10,12 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
+import javax.xml.datatype.DatatypeConfigurationException;
+import javax.xml.datatype.DatatypeFactory;
+import javax.xml.datatype.XMLGregorianCalendar;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.Optional;
 
 import static org.mockito.ArgumentMatchers.any;
@@ -102,6 +108,9 @@ public class BCeIDAccountServiceImplTest {
         BCeIDAccount account = new BCeIDAccount();
 
         BCeIDIndividualIdentity identity = new BCeIDIndividualIdentity();
+        BCeIDDateTime birthDate = new BCeIDDateTime();
+        birthDate.setValue(getDate());
+        identity.setDateOfBirth(birthDate);
 
         BCeIDName name = new BCeIDName();
 
@@ -129,5 +138,16 @@ public class BCeIDAccountServiceImplTest {
 
         accountDetailResponse.setCode(responseCode);
         return accountDetailResponse;
+    }
+    private XMLGregorianCalendar getDate()  {
+        Calendar createDate = Calendar.getInstance();
+        Date cDate = createDate.getTime();
+        GregorianCalendar c = new GregorianCalendar();
+        c.setTime(cDate);
+        try {
+            return DatatypeFactory.newInstance().newXMLGregorianCalendar(c);
+        } catch (DatatypeConfigurationException e) {
+            return null;
+        }
     }
 }
