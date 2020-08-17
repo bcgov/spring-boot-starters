@@ -41,7 +41,7 @@ Sets the username used to set basic authentication on bceid service
 
 * Value type is String
 
-Sets the password used to set basic authentication on bceid service
+Sets the password used to set basic authentication on the BCeID service
 
 #### bcgov.bceid.service.onlineServiceId
 
