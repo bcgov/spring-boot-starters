@@ -104,19 +104,21 @@ public class BCeIDAccountServiceImplTest {
     @DisplayName("Test Return Failure")
     public void withValidRequestReturnFailure() {
 
-
         Optional<IndividualIdentity> result = sut.getIndividualIdentity(GetAccountRequest.IndividualSelfRequest(FAILED));
 
         Assertions.assertFalse(result.isPresent());
     }
 
     private BCeIDString getString(String value) {
+
         BCeIDString stringVal = new BCeIDString();
         stringVal.setValue(value);
         return stringVal;
+
     }
 
     private AccountDetailResponse createAccountDetailsResponse(ResponseCode responseCode) {
+
         AccountDetailResponse accountDetailResponse = new AccountDetailResponse();
 
         BCeIDAccount account = new BCeIDAccount();
@@ -152,8 +154,10 @@ public class BCeIDAccountServiceImplTest {
 
         accountDetailResponse.setCode(responseCode);
         return accountDetailResponse;
+
     }
     private XMLGregorianCalendar getDate()  {
+
         Calendar createDate = Calendar.getInstance();
         Date cDate = createDate.getTime();
         GregorianCalendar c = new GregorianCalendar();
@@ -163,5 +167,7 @@ public class BCeIDAccountServiceImplTest {
         } catch (DatatypeConfigurationException e) {
             return null;
         }
+
     }
+
 }

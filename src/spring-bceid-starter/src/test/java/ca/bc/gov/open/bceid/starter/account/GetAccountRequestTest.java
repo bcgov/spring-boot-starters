@@ -15,58 +15,68 @@ public class GetAccountRequestTest {
     @Test
     @DisplayName("Test Static BusinessSelfRequest")
     public void testStaticMethodBusinessSelfRequest() {
+
         GetAccountRequest result = GetAccountRequest.BusinessSelfRequest(ID);
 
         Assertions.assertEquals(ID, result.getId());
         Assertions.assertEquals(ID, result.getRequesterId());
         Assertions.assertEquals(BCeIDAccountTypeCode.BUSINESS, result.getbCeIDAccountTypeCode());
         Assertions.assertEquals(BCeIDAccountTypeCode.BUSINESS, result.getRequesterBCeIDAccountTypeCode());
+
     }
 
     @Test
     @DisplayName("Test Static EdsSelfRequest")
     public void testStaticMethodEdsSelfRequest() {
+
         GetAccountRequest result = GetAccountRequest.EdsSelfRequest(ID);
 
         Assertions.assertEquals(ID, result.getId());
         Assertions.assertEquals(ID, result.getRequesterId());
         Assertions.assertEquals(BCeIDAccountTypeCode.EDS, result.getbCeIDAccountTypeCode());
         Assertions.assertEquals(BCeIDAccountTypeCode.EDS, result.getRequesterBCeIDAccountTypeCode());
+
     }
 
 
     @Test
     @DisplayName("Test Static IndividualSelfRequest")
     public void testStaticMethodIndividualSelfRequest() {
+
         GetAccountRequest result = GetAccountRequest.IndividualSelfRequest(ID);
 
         Assertions.assertEquals(ID, result.getId());
         Assertions.assertEquals(ID, result.getRequesterId());
         Assertions.assertEquals(BCeIDAccountTypeCode.INDIVIDUAL, result.getbCeIDAccountTypeCode());
         Assertions.assertEquals(BCeIDAccountTypeCode.INDIVIDUAL, result.getRequesterBCeIDAccountTypeCode());
+
     }
 
 
     @Test
     @DisplayName("Test Static InternalSelfRequest")
     public void testStaticMethodInternalSelfRequest() {
+
         GetAccountRequest result = GetAccountRequest.InternalSelfRequest(ID);
 
         Assertions.assertEquals(ID, result.getId());
         Assertions.assertEquals(ID, result.getRequesterId());
         Assertions.assertEquals(BCeIDAccountTypeCode.INTERNAL, result.getbCeIDAccountTypeCode());
         Assertions.assertEquals(BCeIDAccountTypeCode.INTERNAL, result.getRequesterBCeIDAccountTypeCode());
+
     }
 
     @Test
     @DisplayName("Test Static LdbSelfRequest")
     public void testStaticMethodLdbSelfRequest() {
+
         GetAccountRequest result = GetAccountRequest.LdbSelfRequest(ID);
 
         Assertions.assertEquals(ID, result.getId());
         Assertions.assertEquals(ID, result.getRequesterId());
         Assertions.assertEquals(BCeIDAccountTypeCode.LDB, result.getbCeIDAccountTypeCode());
         Assertions.assertEquals(BCeIDAccountTypeCode.LDB, result.getRequesterBCeIDAccountTypeCode());
+
     }
 
     @Test
@@ -83,6 +93,8 @@ public class GetAccountRequestTest {
     @Test
     @DisplayName("Test No Id Exception")
     public void testException() {
+
         Assertions.assertThrows(IllegalArgumentException.class,() -> GetAccountRequest.IndividualSelfRequest(null));
+
     }
 }
