@@ -4,6 +4,8 @@ import ca.bc.gov.open.bceid.starter.account.BCeIDAccountService;
 import ca.bc.gov.open.bceid.starter.account.BCeIDAccountServiceImpl;
 import ca.bc.gov.open.bceid.starter.account.mappers.AccountDetailRequestMapper;
 import ca.bc.gov.open.bceid.starter.account.mappers.AccountDetailRequestMapperImpl;
+import ca.bc.gov.open.bceid.starter.account.mappers.IndividualIdentityMapper;
+import ca.bc.gov.open.bceid.starter.account.mappers.IndividualIdentityMapperImpl;
 import ca.bceid.webservices.client.v9.BCeIDServiceSoap;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.cxf.jaxws.JaxWsProxyFactoryBean;
@@ -27,6 +29,11 @@ public class AutoConfiguration {
     }
 
     @Bean
+    public IndividualIdentityMapper individualIdentityMapper() {
+        return new IndividualIdentityMapperImpl();
+    }
+
+    @Bean
     public BCeIDServiceSoap bCeIDServiceSoap() {
 
         JaxWsProxyFactoryBean jaxWsProxyFactoryBean = new JaxWsProxyFactoryBean();
@@ -41,7 +48,7 @@ public class AutoConfiguration {
     }
 
     @Bean
-    public BCeIDAccountService bCeIDUserService(BCeIDServiceSoap bCeIDServiceSoap, AccountDetailRequestMapper accountDetailRequestMapper) {
-        return new BCeIDAccountServiceImpl(bCeIDServiceSoap, bCeIdProperties, accountDetailRequestMapper);
+    public BCeIDAccountService bCeIDUserService(BCeIDServiceSoap bCeIDServiceSoap, AccountDetailRequestMapper accountDetailRequestMapper, IndividualIdentityMapper individualIdentityMapper) {
+        return new BCeIDAccountServiceImpl(bCeIDServiceSoap, bCeIdProperties, accountDetailRequestMapper, individualIdentityMapper);
     }
 }

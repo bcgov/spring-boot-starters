@@ -3,6 +3,8 @@ package ca.bc.gov.open.bceid.starter.account;
 import ca.bc.gov.open.bceid.starter.BCeIdProperties;
 import ca.bc.gov.open.bceid.starter.account.mappers.AccountDetailRequestMapper;
 import ca.bc.gov.open.bceid.starter.account.mappers.AccountDetailRequestMapperImpl;
+import ca.bc.gov.open.bceid.starter.account.mappers.IndividualIdentityMapper;
+import ca.bc.gov.open.bceid.starter.account.mappers.IndividualIdentityMapperImpl;
 import ca.bc.gov.open.bceid.starter.account.models.IndividualIdentity;
 import ca.bceid.webservices.client.v9.*;
 import org.junit.jupiter.api.*;
@@ -46,6 +48,8 @@ public class BCeIDAccountServiceImplTest {
 
     private AccountDetailRequestMapper accountDetailRequestMapper;
 
+    private IndividualIdentityMapper individualIdentityMapper;
+
     @BeforeEach
     public void init() {
 
@@ -62,8 +66,9 @@ public class BCeIDAccountServiceImplTest {
 
         // Testing mapper as part of the test
         accountDetailRequestMapper = new AccountDetailRequestMapperImpl();
+        individualIdentityMapper = new IndividualIdentityMapperImpl();
 
-        sut = new BCeIDAccountServiceImpl(bCeIDServiceSoapMock, bCeIdPropertiesMock, accountDetailRequestMapper);
+        sut = new BCeIDAccountServiceImpl(bCeIDServiceSoapMock, bCeIdPropertiesMock, accountDetailRequestMapper, individualIdentityMapper);
 
     }
 
@@ -74,7 +79,7 @@ public class BCeIDAccountServiceImplTest {
         Optional<IndividualIdentity> result = sut.getIndividualIdentity(GetAccountRequest.IndividualSelfRequest(SUCCESS));
 
         Assertions.assertTrue(result.isPresent());
-        Assertions.assertEquals(FIRSTNAME, result.get().getName().getFirstname());
+        Assertions.assertEquals(FIRSTNAME, result.get().getName().getFirstName());
         Assertions.assertEquals(INITIAL, result.get().getName().getInitials());
         Assertions.assertEquals(MIDDLENAME, result.get().getName().getMiddleName());
         Assertions.assertEquals(OTHERMIDDLE, result.get().getName().getOtherMiddleName());
