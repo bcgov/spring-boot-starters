@@ -16,6 +16,7 @@
         <commons.io.version>1.4</commons.io.version>
         <joda-time.version>2.10.6</joda-time.version>
         <org.mapstruct.version>1.3.1.Final</org.mapstruct.version>
+        <fi.solita.clamav>1.0.1</fi.solita.clamav>
     </properties>
 
     <dependencyManagement>
@@ -60,6 +61,12 @@
                 <groupId>joda-time</groupId>
                 <artifactId>joda-time</artifactId>
                 <version>${joda-time.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>fi.solita.clamav</groupId>
+                <artifactId>clamav-client</artifactId>
+                <version>${fi.solita.clamav}</version>
             </dependency>
 
 
