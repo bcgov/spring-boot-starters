@@ -11,7 +11,7 @@ Add spring-bceid-starter as a maven dependency
     <dependency>
         <groupId>ca.bc.gov.open</groupId>
         <artifactId>spring-bceid-starter</artifactId>
-        <version>0.1.3</version>
+        <version>0.1.4</version>
     </dependency>
 </dependencies>
 ```
