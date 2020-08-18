@@ -18,7 +18,7 @@ Add spring-bceid-starter as a maven dependency
 
 ## How to use the service
 
-Code is self explanatory. Something like this is the idea:
+The following code should be used to implement this component:
 
 ```java
 
