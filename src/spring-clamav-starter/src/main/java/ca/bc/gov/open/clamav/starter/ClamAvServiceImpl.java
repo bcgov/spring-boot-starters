@@ -23,7 +23,7 @@ public class ClamAvServiceImpl implements ClamAvService {
         byte[] reply;
         try {
             reply = clamAVClient.scan(inputStream);
-        } catch (Exception e) {
+        } catch (IOException e) {
             logger.error("ClamAv Service could not scan the input");
             throw new ClamAvException("Could not scan the input", e);
         }
