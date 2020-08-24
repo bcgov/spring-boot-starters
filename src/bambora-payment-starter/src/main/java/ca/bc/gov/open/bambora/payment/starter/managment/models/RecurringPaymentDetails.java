@@ -29,6 +29,10 @@ public class RecurringPaymentDetails {
         this.redirectURL = builder.redirectURL;
     }
 
+    public static RecurringPaymentDetails.Builder builder() {
+        return new RecurringPaymentDetails.Builder();
+    }
+
     public static class Builder {
 
         private String orderNumber;
