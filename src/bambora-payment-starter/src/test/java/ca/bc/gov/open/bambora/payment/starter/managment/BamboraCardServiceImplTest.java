@@ -31,7 +31,7 @@ public class BamboraCardServiceImplTest {
         bamboraProperties = new BamboraProperties();
         bamboraProperties.setHostedProfileServiceVersion(PROFILE_SERVICE_VERSION);
         bamboraProperties.setHostedProfileUrl(HOSTED_PROFILE_URL);
-        bamboraProperties.setKey(KEY);
+        bamboraProperties.setHashKey(KEY);
         bamboraProperties.setMerchantId(MERCHANT_ID);
         bamboraProperties.setMinutesToExpiry(MINUTES_TO_EXPIRY);
 

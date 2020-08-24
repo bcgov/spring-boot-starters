@@ -55,7 +55,7 @@ public class BamboraCardServiceImpl implements BamboraCardService {
             paramString.append(formatBamboraParam("&", BamboraConstants.PARAM_PPRDIR_CUSTOMER_CODE, recurringPaymentDetails.getEndUserId()));
 
         //add hash key at end of params
-        paramString.append(bamboraProperties.getKey());
+        paramString.append(bamboraProperties.getHashKey());
 
         String hashed = getHash(paramString.toString());
 
@@ -67,7 +67,7 @@ public class BamboraCardServiceImpl implements BamboraCardService {
         String expiry = sdfDate.format(cal.getTime());
 
         // Add hash and expiry to the redirect
-        String hashedParameter = paramString.toString().replace(bamboraProperties.getKey(), MessageFormat.format("&{0}={1}&{2}={3}",  BamboraConstants.PARAM_TRANS_HASH_VALUE, hashed, BamboraConstants.PARAM_TRANS_HASH_EXPIRY, expiry));
+        String hashedParameter = paramString.toString().replace(bamboraProperties.getHashKey(), MessageFormat.format("&{0}={1}&{2}={3}",  BamboraConstants.PARAM_TRANS_HASH_VALUE, hashed, BamboraConstants.PARAM_TRANS_HASH_EXPIRY, expiry));
 
         return new Uri(MessageFormat.format("{0}?{1}", bamboraProperties.getHostedProfileUrl(), hashedParameter));
 

@@ -11,7 +11,7 @@ public class BamboraProperties {
     private String merchantId;
     private String hostedProfileUrl;
     private String hostedProfileServiceVersion;
-    private String key;
+    private String hashKey;
     private int minutesToExpiry;
 
     public String getMerchantId() {
@@ -38,12 +38,12 @@ public class BamboraProperties {
         this.hostedProfileServiceVersion = hostedProfileServiceVersion;
     }
 
-    public String getKey() {
-        return key;
+    public String getHashKey() {
+        return hashKey;
     }
 
-    public void setKey(String key) {
-        this.key = key;
+    public void setHashKey(String hashKey) {
+        this.hashKey = hashKey;
     }
 
     public int getMinutesToExpiry() {
