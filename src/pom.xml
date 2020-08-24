@@ -23,6 +23,7 @@
                 <module>spring-bceid-starter</module>
                 <module>spring-starters-bom</module>
                 <module>spring-clamav-starter</module>
+                <module>bambora-payment-starter</module>
             </modules>
         </profile>
 
@@ -47,6 +48,13 @@
             <modules>
                 <module>spring-starters-bom</module>
                 <module>spring-clamav-starter</module>
+            </modules>
+        </profile>
+
+        <profile>
+            <id>payment</id>
+            <modules>
+                <module>bambora-payment-starter</module>
             </modules>
         </profile>
 
