@@ -5,7 +5,7 @@ import ca.bc.gov.open.bambora.payment.starter.BamboraException;
 import ca.bc.gov.open.bambora.payment.starter.BamboraProperties;
 import ca.bc.gov.open.bambora.payment.starter.managment.models.RecurringPaymentDetails;
 import com.sun.jndi.toolkit.url.Uri;
-import org.springframework.util.DigestUtils;
+import org.apache.commons.codec.digest.DigestUtils;
 
 import java.net.MalformedURLException;
 import java.text.MessageFormat;
@@ -54,23 +54,18 @@ public class BamboraCardServiceImpl implements BamboraCardService {
         if (operationType.equals(BamboraConstants.OperationTypes.M.toString()))
             paramString.append(formatBamboraParam("&", BamboraConstants.PARAM_PPRDIR_CUSTOMER_CODE, recurringPaymentDetails.getEndUserId()));
 
-        //add hash key at end of params
-        paramString.append(bamboraProperties.getHashKey());
+        paramString.append(MessageFormat.format("&{0}={1}&{2}={3}",  BamboraConstants.PARAM_TRANS_HASH_VALUE, getHash(paramString.toString()), BamboraConstants.PARAM_TRANS_HASH_EXPIRY, getExpiry()));
 
-        String hashed = getHash(paramString.toString());
+        return new Uri(MessageFormat.format("{0}?{1}", bamboraProperties.getHostedProfileUrl(), paramString.toString()));
 
-        // Calculate the expiry based on the minutesToExpire value.
+    }
+
+    private String getExpiry() {
         SimpleDateFormat sdfDate = new SimpleDateFormat(BamboraConstants.PARAM_TRANS_HASH_EXPIRY_FORMAT);
         Calendar cal = Calendar.getInstance();
         cal.setTime(new Date());
         cal.add(Calendar.MINUTE,  bamboraProperties.getMinutesToExpiry());
-        String expiry = sdfDate.format(cal.getTime());
-
-        // Add hash and expiry to the redirect
-        String hashedParameter = paramString.toString().replace(bamboraProperties.getHashKey(), MessageFormat.format("&{0}={1}&{2}={3}",  BamboraConstants.PARAM_TRANS_HASH_VALUE, hashed, BamboraConstants.PARAM_TRANS_HASH_EXPIRY, expiry));
-
-        return new Uri(MessageFormat.format("{0}?{1}", bamboraProperties.getHostedProfileUrl(), hashedParameter));
-
+        return sdfDate.format(cal.getTime());
     }
 
     private String formatBamboraParam(String prefix, String key, String value) {
@@ -78,7 +73,7 @@ public class BamboraCardServiceImpl implements BamboraCardService {
     }
 
     private String getHash(String message) {
-        String digest = DigestUtils.md5DigestAsHex(message.getBytes());
+        String digest = DigestUtils.md5Hex(MessageFormat.format("{0}{1}", message, bamboraProperties.getHashKey()));
         return digest.toUpperCase();
     }
 }

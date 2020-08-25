@@ -18,8 +18,8 @@ public class BamboraCardServiceImplTest {
     private static final String ECHODATA = "ECHODATA";
     private static final String REDIRECTURL = "REDIRECTURL";
     private static final String END_USER_ID = "123";
-    private static final String BAMBORA_CLIENT_URL = "http://localhost?serviceVersion=HOSTEDPROFILE&merchantId=123&trnLanguage=eng&operationType=M&ref1=ECHODATA&trnReturnURL=REDIRECTURL&trnOrderNumber=REDIRECTURL&customerCode=123&hashValue=98C48E9A9C45B99698ED7D2ED7194A91&hashExpiry=202008241242";
-    private static final String BAMBORA_NEW_URL = "http://localhost?serviceVersion=HOSTEDPROFILE&merchantId=123&trnLanguage=eng&operationType=M&ref1=ECHODATA&trnReturnURL=REDIRECTURL&trnOrderNumber=REDIRECTURL&customerCode=123&hashValue=98C48E9A9C45B99698ED7D2ED7194A91&hashExpiry=202008241242";
+    private static final String BAMBORA_CLIENT_URL = "http://localhost?serviceVersion=HOSTEDPROFILE&merchantId=123&trnLanguage=eng&operationType=M&ref1=ECHODATA&trnReturnURL=REDIRECTURL&trnOrderNumber=REDIRECTURL&customerCode=123&hashValue=98C48E9A9C45B99698ED7D2ED7194A91";
+    private static final String BAMBORA_NEW_URL = "http://localhost?serviceVersion=HOSTEDPROFILE&merchantId=123&trnLanguage=eng&operationType=N&ref1=ECHODATA&trnReturnURL=REDIRECTURL&trnOrderNumber=REDIRECTURL&hashValue=BB2616ADA96F7C72824835D484F23B9B";
 
     private BamboraCardServiceImpl sut;
 
@@ -45,7 +45,7 @@ public class BamboraCardServiceImplTest {
         Uri actual = sut.setupRecurringPayment(createPaymentDetail(END_USER_ID));
 
         Assertions.assertNotNull(actual);
-        Assertions.assertEquals(actual.toString(), BAMBORA_CLIENT_URL);
+        Assertions.assertTrue(actual.toString().contains(BAMBORA_CLIENT_URL));
     }
 
 
@@ -57,7 +57,7 @@ public class BamboraCardServiceImplTest {
         Uri actual = sut.setupRecurringPayment(createPaymentDetail(null));
 
         Assertions.assertNotNull(actual);
-        Assertions.assertEquals(actual.toString(), BAMBORA_NEW_URL);
+        Assertions.assertTrue(actual.toString().contains(BAMBORA_NEW_URL));
     }
 
     @Test
