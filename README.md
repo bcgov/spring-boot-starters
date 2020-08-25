@@ -32,5 +32,5 @@ Are you adding a new starter to this repository? When a PR is created, do the fo
 1. Make sure to update all version numbers to the incremented version required.
 2. Create a version referencing the newest version.
 3. Publish the version.
-4. Update your Git Actions to reference the correct tag(ref)
+4. Update your Git Actions to reference the correct tag (ref)
 5. Ensure your git actions build correctly.
