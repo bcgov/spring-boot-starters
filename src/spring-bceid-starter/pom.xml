@@ -6,7 +6,7 @@
 
     <groupId>ca.bc.gov.open</groupId>
     <artifactId>spring-bceid-starter</artifactId>
-    <version>0.1.5</version>
+    <version>0.1.6</version>
 
     <properties>
         <java.version>1.8</java.version>
@@ -86,7 +86,7 @@
             <dependency>
                 <groupId>ca.bc.gov.open</groupId>
                 <artifactId>spring-starters-bom</artifactId>
-                <version>0.1.5</version>
+                <version>0.1.6</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
