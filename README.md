@@ -5,7 +5,7 @@ A collection of Spring boot starters
 
 Currently, the most efficient way to store these starters for use is in your project's Nexus artifactory. Please see the sample Openshift Template for pushing items to Nexus if you do not know how to.
 
-Once all starter jars are stored in Nexus, make sure to alter your projects build config to reference the nexus through the environment variable `MAVEN_MIRROR_URL` with the value `http://nexus:8081/repository/${YOUR_GROUP_HERE}`
+Once all starter jars are stored in Nexus, make sure to alter your project's build config to reference Nexus through the environment variable `MAVEN_MIRROR_URL` with the value `http://nexus:8081/repository/${YOUR_GROUP_HERE}`
 
 # Project Integration
 
