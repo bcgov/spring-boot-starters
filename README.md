@@ -27,7 +27,7 @@ Make sure to update the ref in the checkout action to point to the latest releas
 
 # How to Update this Repository
 
-Are you adding a new starter to this repository? When  a PR is created, do the following:
+Are you adding a new starter to this repository? When a PR is created, do the following:
 
 1. Make sure to update all version numbers to the incremented version required.
 2. Create a version referencing the newest version.
