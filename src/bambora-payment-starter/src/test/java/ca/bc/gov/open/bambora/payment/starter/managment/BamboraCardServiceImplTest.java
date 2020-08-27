@@ -19,7 +19,7 @@ public class BamboraCardServiceImplTest {
     private static final String REDIRECTURL = "REDIRECTURL";
     private static final String END_USER_ID = "123";
     private static final String BAMBORA_CLIENT_URL = "http://localhost?serviceVersion=HOSTEDPROFILE&merchantId=123&trnLanguage=eng&operationType=M&ref1=ECHODATA&trnReturnURL=REDIRECTURL&trnOrderNumber=ORDERNUM&customerCode=123";
-    private static final String BAMBORA_NEW_URL = "localhost?serviceVersion=HOSTEDPROFILE&merchantId=123&trnLanguage=eng&operationType=N&ref1=ECHODATA&trnReturnURL=REDIRECTURL&trnOrderNumber=ORDERNUM";
+    private static final String BAMBORA_NEW_URL = "http://localhost?serviceVersion=HOSTEDPROFILE&merchantId=123&trnLanguage=eng&operationType=N&ref1=ECHODATA&trnReturnURL=REDIRECTURL&trnOrderNumber=ORDERNUM";
 
     private BamboraCardServiceImpl sut;
 
