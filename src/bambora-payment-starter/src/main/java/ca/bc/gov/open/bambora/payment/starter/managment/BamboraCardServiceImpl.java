@@ -49,7 +49,7 @@ public class BamboraCardServiceImpl implements BamboraCardService {
 
         paramString.append(formatBamboraParam("&", BamboraConstants.PARAM_PPRDIR_RETURN_URL, recurringPaymentDetails.getRedirectURL()));
 
-        paramString.append(formatBamboraParam("&", BamboraConstants.PARAM_PPRDIR_ORDER_NUMBER, recurringPaymentDetails.getRedirectURL()));
+        paramString.append(formatBamboraParam("&", BamboraConstants.PARAM_PPRDIR_ORDER_NUMBER, recurringPaymentDetails.getOrderNumber()));
 
         if (operationType.equals(BamboraConstants.OperationTypes.M.toString()))
             paramString.append(formatBamboraParam("&", BamboraConstants.PARAM_PPRDIR_CUSTOMER_CODE, recurringPaymentDetails.getEndUserId()));
