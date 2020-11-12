@@ -24,6 +24,7 @@
                 <module>spring-starters-bom</module>
                 <module>spring-clamav-starter</module>
                 <module>bambora-payment-starter</module>
+                <module>pci-api-gateway</module>
             </modules>
         </profile>
 
@@ -55,6 +56,7 @@
             <id>payment</id>
             <modules>
                 <module>bambora-payment-starter</module>
+                <module>pci-api-gateway</module>
             </modules>
         </profile>
 
