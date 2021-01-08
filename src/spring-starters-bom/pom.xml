@@ -19,6 +19,14 @@
         <fi.solita.clamav>1.0.1</fi.solita.clamav>
     </properties>
 
+    <distributionManagement>
+        <repository>
+        <id>github</id>
+        <name>GitHub Packages</name>
+        <url>https://maven.pkg.github.com/bcgov/spring-boot-starters</url>
+        </repository>
+    </distributionManagement>
+
     <dependencyManagement>
         <dependencies>
 

@@ -17,6 +17,14 @@
         <org.mapstruct.version>1.3.1.Final</org.mapstruct.version>
     </properties>
 
+    <distributionManagement>
+        <repository>
+        <id>github</id>
+        <name>GitHub Packages</name>
+        <url>https://maven.pkg.github.com/bcgov/spring-boot-starters</url>
+        </repository>
+    </distributionManagement>
+
     <dependencies>
 
         <dependency>

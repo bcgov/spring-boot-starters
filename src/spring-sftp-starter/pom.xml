@@ -16,6 +16,14 @@
         <spring-boot.version>2.2.4.RELEASE</spring-boot.version>
     </properties>
 
+    <distributionManagement>
+        <repository>
+        <id>github</id>
+        <name>GitHub Packages</name>
+        <url>https://maven.pkg.github.com/bcgov/spring-boot-starters</url>
+        </repository>
+    </distributionManagement>
+
     <dependencies>
 
         <dependency>

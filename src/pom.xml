@@ -15,6 +15,14 @@
         <java.version>1.8</java.version>
     </properties>
 
+    <distributionManagement>
+        <repository>
+        <id>github</id>
+        <name>GitHub Packages</name>
+        <url>https://maven.pkg.github.com/bcgov/spring-boot-starters</url>
+        </repository>
+    </distributionManagement>
+
     <profiles>
         <profile>
             <id>all</id>
