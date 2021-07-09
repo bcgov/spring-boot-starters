@@ -27,7 +27,7 @@ public class AutoConfiguration {
         logger.debug("ClamAv port: [{}]", clamAvProperties.getPort());
         logger.debug("ClamAv timeout: [{}]", clamAvProperties.getTimeout());
 
-        return new ClamAVClient(clamAvProperties.getHost(), clamAvProperties.getPort());
+        return new ClamAVClient(clamAvProperties.getHost(), clamAvProperties.getPort(), clamAvProperties.getTimeout());
 
     }
 
