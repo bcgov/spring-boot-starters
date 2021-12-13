@@ -63,7 +63,7 @@
             <dependency>
                 <groupId>ca.bc.gov.open</groupId>
                 <artifactId>spring-starters-bom</artifactId>
-                <version>0.2.2-SNAPSHOT</version>
+                <version>0.2.2</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
