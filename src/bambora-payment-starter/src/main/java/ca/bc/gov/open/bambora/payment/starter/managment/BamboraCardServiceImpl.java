@@ -1,17 +1,19 @@
 package ca.bc.gov.open.bambora.payment.starter.managment;
 
-import ca.bc.gov.open.bambora.payment.starter.BamboraConstants;
-import ca.bc.gov.open.bambora.payment.starter.BamboraException;
-import ca.bc.gov.open.bambora.payment.starter.BamboraProperties;
-import ca.bc.gov.open.bambora.payment.starter.managment.models.RecurringPaymentDetails;
-import com.sun.jndi.toolkit.url.Uri;
-import org.apache.commons.codec.digest.DigestUtils;
-
 import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.text.MessageFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+
+import org.apache.commons.codec.digest.DigestUtils;
+
+import ca.bc.gov.open.bambora.payment.starter.BamboraConstants;
+import ca.bc.gov.open.bambora.payment.starter.BamboraException;
+import ca.bc.gov.open.bambora.payment.starter.BamboraProperties;
+import ca.bc.gov.open.bambora.payment.starter.managment.models.RecurringPaymentDetails;
 
 public class BamboraCardServiceImpl implements BamboraCardService {
 
@@ -22,16 +24,18 @@ public class BamboraCardServiceImpl implements BamboraCardService {
     }
 
     @Override
-    public Uri setupRecurringPayment(RecurringPaymentDetails recurringPaymentDetails) {
+    public URI setupRecurringPayment(RecurringPaymentDetails recurringPaymentDetails) {
         try {
             return buildRecurringPaymentUrl(recurringPaymentDetails);
         } catch (MalformedURLException e) {
             throw new BamboraException("Url construction failed", e.getCause());
-        }
+        } catch (URISyntaxException e) {
+            throw new BamboraException("Url construction failed", e.getCause());
+		}
     }
 
 
-    private Uri buildRecurringPaymentUrl(RecurringPaymentDetails recurringPaymentDetails) throws MalformedURLException {
+    private URI buildRecurringPaymentUrl(RecurringPaymentDetails recurringPaymentDetails) throws MalformedURLException, URISyntaxException {
 
         String operationType = (recurringPaymentDetails.getEndUserId() != null ? BamboraConstants.OperationTypes.M.toString() : BamboraConstants.OperationTypes.N.toString());
 
@@ -56,7 +60,7 @@ public class BamboraCardServiceImpl implements BamboraCardService {
 
         paramString.append(MessageFormat.format("&{0}={1}&{2}={3}",  BamboraConstants.PARAM_TRANS_HASH_VALUE, getHash(paramString.toString()), BamboraConstants.PARAM_TRANS_HASH_EXPIRY, getExpiry()));
 
-        return new Uri(MessageFormat.format("{0}?{1}", bamboraProperties.getHostedProfileUrl(), paramString.toString()));
+        return new URI(MessageFormat.format("{0}?{1}", bamboraProperties.getHostedProfileUrl(), paramString.toString()));
 
     }
 

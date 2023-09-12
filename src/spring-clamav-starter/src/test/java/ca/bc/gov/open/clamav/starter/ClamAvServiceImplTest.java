@@ -23,7 +23,7 @@ class ClamAvServiceImplTest {
     @BeforeEach
     void setUp() throws IOException {
 
-        MockitoAnnotations.initMocks(this);
+        MockitoAnnotations.openMocks(this);
         sut = new ClamAvServiceImpl(clamAvClient);
 
     }

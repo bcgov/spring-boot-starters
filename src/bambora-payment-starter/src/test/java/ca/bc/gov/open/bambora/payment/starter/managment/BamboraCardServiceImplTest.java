@@ -1,10 +1,16 @@
 package ca.bc.gov.open.bambora.payment.starter.managment;
 
+import java.net.URI;
+
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+
 import ca.bc.gov.open.bambora.payment.starter.BamboraException;
 import ca.bc.gov.open.bambora.payment.starter.BamboraProperties;
 import ca.bc.gov.open.bambora.payment.starter.managment.models.RecurringPaymentDetails;
-import com.sun.jndi.toolkit.url.Uri;
-import org.junit.jupiter.api.*;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @DisplayName("Test BamboraCardServiceImpl")
@@ -42,7 +48,7 @@ public class BamboraCardServiceImplTest {
     public void withClientIdCreateUpdateUrl() {
         sut = new BamboraCardServiceImpl(bamboraProperties);
 
-        Uri actual = sut.setupRecurringPayment(createPaymentDetail(END_USER_ID));
+        URI actual = sut.setupRecurringPayment(createPaymentDetail(END_USER_ID));
 
         Assertions.assertNotNull(actual);
         Assertions.assertTrue(actual.toString().contains(BAMBORA_CLIENT_URL));
@@ -54,7 +60,7 @@ public class BamboraCardServiceImplTest {
     public void withoutClientIdCreateUpdateUrl() {
         sut = new BamboraCardServiceImpl(bamboraProperties);
 
-        Uri actual = sut.setupRecurringPayment(createPaymentDetail(null));
+        URI actual = sut.setupRecurringPayment(createPaymentDetail(null));
 
         Assertions.assertNotNull(actual);
         Assertions.assertTrue(actual.toString().contains(BAMBORA_NEW_URL));
