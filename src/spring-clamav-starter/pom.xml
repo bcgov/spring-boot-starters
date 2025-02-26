@@ -6,7 +6,7 @@
 
     <groupId>ca.bc.gov.open</groupId>
     <artifactId>spring-clamav-starter</artifactId>
-    <version>1.0.2</version>
+    <version>1.0.3</version>
 
     <properties>
         <java.version>17</java.version>
@@ -63,7 +63,7 @@
             <dependency>
                 <groupId>ca.bc.gov.open</groupId>
                 <artifactId>spring-starters-bom</artifactId>
-                <version>1.0.2</version>
+                <version>1.0.3</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
