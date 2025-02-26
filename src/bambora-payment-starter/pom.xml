@@ -9,7 +9,7 @@
 
 	<properties>
 		<java.version>17</java.version>
-		<spring-boot.version>3.3.4</spring-boot.version>
+		<spring-boot.version>3.3.7</spring-boot.version>
 		<log4j2.version>2.17.1</log4j2.version>
 	</properties>
 

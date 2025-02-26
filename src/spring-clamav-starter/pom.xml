@@ -12,8 +12,7 @@
         <java.version>17</java.version>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
-        <spring-boot.version>3.3.4</spring-boot.version>
-        <org.apache.maven.plugins.version.version>3.1.2</org.apache.maven.plugins.version.version>
+        <spring-boot.version>3.3.7</spring-boot.version>
         <log4j2.version>2.17.1</log4j2.version>
     </properties>
 
@@ -76,18 +75,16 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>${org.apache.maven.plugins.version.version}</version>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-failsafe-plugin</artifactId>
-                <version>${org.apache.maven.plugins.version.version}</version>
             </plugin>
             <!--jacoco code coverage-->
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
-                <version>0.8.7</version>
+                <version>0.8.12</version>
                 <executions>
                     <execution>
                         <goals>
