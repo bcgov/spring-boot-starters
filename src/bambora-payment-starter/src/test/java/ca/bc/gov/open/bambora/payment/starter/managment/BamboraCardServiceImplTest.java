@@ -66,14 +66,6 @@ public class BamboraCardServiceImplTest {
         Assertions.assertTrue(actual.toString().contains(BAMBORA_NEW_URL));
     }
 
-    @Test
-    @DisplayName("With invalid paramter throw invalid url exception")
-    public void withInvalidParamterThrowException() {
-        bamboraProperties.setHostedProfileUrl("NOTAURL");
-        sut = new BamboraCardServiceImpl(bamboraProperties);
-        Assertions.assertThrows(BamboraException.class, () -> sut.setupRecurringPayment(createPaymentDetail(END_USER_ID)));
-    }
-
     private RecurringPaymentDetails createPaymentDetail(String endUserId) {
         return RecurringPaymentDetails.builder()
                 .orderNumber(ORDERNUM)

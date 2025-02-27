@@ -5,11 +5,11 @@
 
 	<groupId>ca.bc.gov.open</groupId>
 	<artifactId>bambora-payment-starter</artifactId>
-	<version>1.0.2</version>
+	<version>1.0.3</version>
 
 	<properties>
 		<java.version>17</java.version>
-		<spring-boot.version>3.3.4</spring-boot.version>
+		<spring-boot.version>3.3.7</spring-boot.version>
 		<log4j2.version>2.17.1</log4j2.version>
 	</properties>
 
@@ -69,7 +69,7 @@
 			<dependency>
 				<groupId>ca.bc.gov.open</groupId>
 				<artifactId>spring-starters-bom</artifactId>
-				<version>1.0.2</version>
+				<version>1.0.3</version>
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
