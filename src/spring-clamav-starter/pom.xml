@@ -6,14 +6,14 @@
 
     <groupId>ca.bc.gov.open</groupId>
     <artifactId>spring-clamav-starter</artifactId>
-    <version>1.0.3</version>
+    <version>1.0.4</version>
 
     <properties>
         <java.version>17</java.version>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
-        <spring-boot.version>3.3.7</spring-boot.version>
-        <log4j2.version>2.17.1</log4j2.version>
+        <spring-boot.version>3.5.0</spring-boot.version>
+        <log4j2.version>2.24.3</log4j2.version>
     </properties>
 
     <distributionManagement>
@@ -62,7 +62,7 @@
             <dependency>
                 <groupId>ca.bc.gov.open</groupId>
                 <artifactId>spring-starters-bom</artifactId>
-                <version>1.0.3</version>
+                <version>1.0.4</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -84,7 +84,7 @@
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
-                <version>0.8.12</version>
+                <version>0.8.13</version>
                 <executions>
                     <execution>
                         <goals>

@@ -6,17 +6,17 @@
 
     <groupId>ca.bc.gov.open</groupId>
     <artifactId>spring-bceid-starter</artifactId>
-    <version>1.0.3</version>
+    <version>1.0.4</version>
 
     <properties>
         <java.version>17</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
-        <spring-boot.version>3.3.7</spring-boot.version>
-        <org.mapstruct.version>1.3.1.Final</org.mapstruct.version>
-        <log4j2.version>2.17.1</log4j2.version>
-        <org.apache.cxf.version>4.0.6</org.apache.cxf.version>
+        <spring-boot.version>3.5.0</spring-boot.version>
+        <org.mapstruct.version>1.6.3</org.mapstruct.version>
+        <log4j2.version>2.24.3</log4j2.version>
+        <org.apache.cxf.version>4.1.0</org.apache.cxf.version>
         
         <!-- automatically run annotation processors within the incremental compilation (Eclipse) -->
   		<m2e.apt.activation>jdt_apt</m2e.apt.activation>
@@ -99,7 +99,7 @@
             <dependency>
                 <groupId>ca.bc.gov.open</groupId>
                 <artifactId>spring-starters-bom</artifactId>
-                <version>1.0.3</version>
+                <version>1.0.4</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -112,7 +112,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.5.1</version>
+                <version>3.14.0</version>
                 <configuration>
                     <source>${java.version}</source>
                     <target>${java.version}</target>
