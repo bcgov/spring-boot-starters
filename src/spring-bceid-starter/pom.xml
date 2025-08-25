@@ -16,7 +16,7 @@
         <spring-boot.version>3.5.4</spring-boot.version>
         <org.mapstruct.version>1.6.3</org.mapstruct.version>
         <log4j2.version>2.24.3</log4j2.version>
-        <org.apache.cxf.version>4.1.0</org.apache.cxf.version>
+        <org.apache.cxf.version>4.1.3</org.apache.cxf.version>
         
         <!-- automatically run annotation processors within the incremental compilation (Eclipse) -->
   		<m2e.apt.activation>jdt_apt</m2e.apt.activation>
@@ -73,6 +73,7 @@
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
+            <version>3.18.0</version>
         </dependency>
 
         <dependency>
