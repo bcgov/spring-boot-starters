@@ -1,0 +1,17 @@
+#!/bin/bash
+set -e
+
+echo "---> Running run"
+
+APP_ROOT=${APP_ROOT:-/opt/app-root}
+SRC_DIR=${HOME:-/opt/app-root/src}
+NGINX_DOCROOT=/usr/share/nginx/html
+
+echo "---> Syncing application content to ${NGINX_DOCROOT}"
+rm -rf ${NGINX_DOCROOT:?}/*
+
+# Copy everything except nginx-cfg
+cp -R ${SRC_DIR}/* ${NGINX_DOCROOT}/ 2>/dev/null || true
+
+echo "---> Starting nginx"
+exec nginx -g 'daemon off;'

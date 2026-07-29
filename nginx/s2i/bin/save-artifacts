@@ -1,0 +1,3 @@
+#!/bin/bash
+# No build-time artifacts to persist between builds
+exit 0

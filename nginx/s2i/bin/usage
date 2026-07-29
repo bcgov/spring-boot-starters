@@ -1,0 +1,20 @@
+#!/bin/bash
+cat <<EOF
+This is a Source-to-Image (S2I) builder for Nginx based on nginx:latest.
+
+To use it with OpenShift:
+
+  oc new-build \
+    --name=my-nginx-app \
+    --image-stream=custom-nginx-s2i:latest \
+    --binary
+
+Then push your source:
+
+  oc start-build my-nginx-app --from-dir=. --follow
+
+Your app should contain:
+  - index.html or other static assets at repo root
+  - optional nginx-cfg/ with *.conf files for /etc/nginx/conf.d
+
+EOF
