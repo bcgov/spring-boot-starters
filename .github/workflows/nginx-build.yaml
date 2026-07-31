@@ -85,7 +85,7 @@ jobs:
             echo "ARTIFACTORY_REPO=d043-dps" >> $GITHUB_ENV
             echo "ARTIFACTORY_USERNAME=${{ secrets.DPS_ARTIFACTORY_USERNAME }}" >> $GITHUB_ENV
             echo "ARTIFACTORY_PASSWORD=${{ secrets.DPS_ARTIFACTORY_PASSWORD }}" >> $GITHUB_ENV
-         elif [[ "${{ env.IMAGE_NAME }}" == "nginx-carma" ]]; then
+          elif [[ "${{ env.IMAGE_NAME }}" == "nginx-carma" ]]; then
             echo "ARTIFACTORY_REPO=c973-carma" >> $GITHUB_ENV
             echo "ARTIFACTORY_USERNAME=${{ secrets.CARMA_ARTIFACTORY_USERNAME }}" >> $GITHUB_ENV
             echo "ARTIFACTORY_PASSWORD=${{ secrets.CARMA_ARTIFACTORY_PASSWORD }}" >> $GITHUB_ENV
