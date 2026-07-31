@@ -1,0 +1,121 @@
+name: Nginx Build
+permissions:
+  contents: write 
+
+on:
+  workflow_dispatch:
+    inputs:
+      project:
+        description: 'Select project'
+        required: true
+        type: choice
+        options:
+          - nginx-jag-icon2
+          - nginx-jag-einformation
+          - nginx-jag-coa
+          - nginx-jag-staffnet
+          - nginx-jag-role-registry
+          - nginx-jag-adobe-common-service
+          - nginx-jag-ccd
+          - nginx-jag-scss
+          - nginx-efiling
+          - nginx-pcss
+          - nginx-jag-cdds
+          - nginx-dps
+          - nginx-carma
+
+env:
+  NGINX_VERSION: 1.31.3
+  IMAGE_NAME: ${{ github.event.inputs.project }}
+  WORKING_DIRECTORY: ./nginx
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set Conditions
+        run: |
+          if [[ "${{ env.IMAGE_NAME }}" == "nginx-jag-icon2" ]]; then
+            echo "ARTIFACTORY_REPO=iaf9-jag-icon2" >> $GITHUB_ENV
+            echo "ARTIFACTORY_USERNAME=${{ secrets.ICON2_ARTIFACTORY_USERNAME }}" >> $GITHUB_ENV
+            echo "ARTIFACTORY_PASSWORD=${{ secrets.ICON2_ARTIFACTORY_PASSWORD }}" >> $GITHUB_ENV
+          elif [[ "${{ env.IMAGE_NAME }}" == "nginx-jag-einformation" ]]; then
+            echo "ARTIFACTORY_REPO=eb59-einformation" >> $GITHUB_ENV
+            echo "ARTIFACTORY_USERNAME=${{ secrets.EINFORMATION_ARTIFACTORY_USERNAME }}" >> $GITHUB_ENV
+            echo "ARTIFACTORY_PASSWORD=${{ secrets.EINFORMATION_ARTIFACTORY_PASSWORD }}" >> $GITHUB_ENV
+          elif [[ "${{ env.IMAGE_NAME }}" == "nginx-jag-coa" ]]; then
+            echo "ARTIFACTORY_REPO=jbf8-jag-coa" >> $GITHUB_ENV
+            echo "ARTIFACTORY_USERNAME=${{ secrets.COA_ARTIFACTORY_USERNAME }}" >> $GITHUB_ENV
+            echo "ARTIFACTORY_PASSWORD=${{ secrets.COA_ARTIFACTORY_PASSWORD }}" >> $GITHUB_ENV
+          elif [[ "${{ env.IMAGE_NAME }}" == "nginx-jag-staffnet" ]]; then
+            echo "ARTIFACTORY_REPO=sc5f-jag-staffnet" >> $GITHUB_ENV
+            echo "ARTIFACTORY_USERNAME=${{ secrets.STAFFNET_ARTIFACTORY_USERNAME }}" >> $GITHUB_ENV
+            echo "ARTIFACTORY_PASSWORD=${{ secrets.STAFFNET_ARTIFACTORY_PASSWORD }}" >> $GITHUB_ENV
+          elif [[ "${{ env.IMAGE_NAME }}" == "nginx-jag-role-registry" ]]; then
+            echo "ARTIFACTORY_REPO=re97-role-registry" >> $GITHUB_ENV
+            echo "ARTIFACTORY_USERNAME=${{ secrets.ROLE_REGISTRY_ARTIFACTORY_USERNAME }}" >> $GITHUB_ENV
+            echo "ARTIFACTORY_PASSWORD=${{ secrets.ROLE_REGISTRY_ARTIFACTORY_PASSWORD }}" >> $GITHUB_ENV
+          elif [[ "${{ env.IMAGE_NAME }}" == "nginx-jag-adobe-common-service" ]]; then
+            echo "ARTIFACTORY_REPO=d735-adobe-common-service" >> $GITHUB_ENV
+            echo "ARTIFACTORY_USERNAME=${{ secrets.ADOBE_COMMONS_ARTIFACTORY_USERNAME }}" >> $GITHUB_ENV
+            echo "ARTIFACTORY_PASSWORD=${{ secrets.ADOBE_COMMONS_ARTIFACTORY_PASSWORD }}" >> $GITHUB_ENV
+          elif [[ "${{ env.IMAGE_NAME }}" == "nginx-jag-ccd" ]]; then
+            echo "ARTIFACTORY_REPO=c52e-jag-ccd" >> $GITHUB_ENV
+            echo "ARTIFACTORY_USERNAME=${{ secrets.CCD_ARTIFACTORY_USERNAME }}" >> $GITHUB_ENV
+            echo "ARTIFACTORY_PASSWORD=${{ secrets.CCD_ARTIFACTORY_PASSWORD }}" >> $GITHUB_ENV
+          elif [[ "${{ env.IMAGE_NAME }}" == "nginx-jag-scss" ]]; then
+            echo "ARTIFACTORY_REPO=s17b-jag-scss" >> $GITHUB_ENV
+            echo "ARTIFACTORY_USERNAME=${{ secrets.SCSS_ARTIFACTORY_USERNAME }}" >> $GITHUB_ENV
+            echo "ARTIFACTORY_PASSWORD=${{ secrets.SCSS_ARTIFACTORY_PASSWORD }}" >> $GITHUB_ENV
+          elif [[ "${{ env.IMAGE_NAME }}" == "nginx-efiling" ]]; then
+            echo "ARTIFACTORY_REPO=efc7-efiling-api" >> $GITHUB_ENV
+            echo "ARTIFACTORY_USERNAME=${{ secrets.EFILING_ARTIFACTORY_USERNAME }}" >> $GITHUB_ENV
+            echo "ARTIFACTORY_PASSWORD=${{ secrets.EFILING_ARTIFACTORY_PASSWORD }}" >> $GITHUB_ENV
+          elif [[ "${{ env.IMAGE_NAME }}" == "nginx-pcss" ]]; then
+            echo "ARTIFACTORY_REPO=pcd1-jag-pcss" >> $GITHUB_ENV
+            echo "ARTIFACTORY_USERNAME=${{ secrets.PCSS_ARTIFACTORY_USERNAME }}" >> $GITHUB_ENV
+            echo "ARTIFACTORY_PASSWORD=${{ secrets.PCSS_ARTIFACTORY_PASSWORD }}" >> $GITHUB_ENV
+          elif [[ "${{ env.IMAGE_NAME }}" == "nginx-jag-cdds" ]]; then
+            echo "ARTIFACTORY_REPO=cc71-jag-cdds" >> $GITHUB_ENV
+            echo "ARTIFACTORY_USERNAME=${{ secrets.CDDS_ARTIFACTORY_USERNAME }}" >> $GITHUB_ENV
+            echo "ARTIFACTORY_PASSWORD=${{ secrets.CDDS_ARTIFACTORY_PASSWORD }}" >> $GITHUB_ENV
+          elif [[ "${{ env.IMAGE_NAME }}" == "nginx-dps" ]]; then
+            echo "ARTIFACTORY_REPO=d043-dps" >> $GITHUB_ENV
+            echo "ARTIFACTORY_USERNAME=${{ secrets.DPS_ARTIFACTORY_USERNAME }}" >> $GITHUB_ENV
+            echo "ARTIFACTORY_PASSWORD=${{ secrets.DPS_ARTIFACTORY_PASSWORD }}" >> $GITHUB_ENV
+         elif [[ "${{ env.IMAGE_NAME }}" == "nginx-carma" ]]; then
+            echo "ARTIFACTORY_REPO=c973-carma" >> $GITHUB_ENV
+            echo "ARTIFACTORY_USERNAME=${{ secrets.CARMA_ARTIFACTORY_USERNAME }}" >> $GITHUB_ENV
+            echo "ARTIFACTORY_PASSWORD=${{ secrets.CARMA_ARTIFACTORY_PASSWORD }}" >> $GITHUB_ENV
+          else
+            echo "Unknown application: ${{ env.IMAGE_NAME }}"
+          fi
+      
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+      
+      - name: Log in to Artifactory
+        uses: docker/login-action@v2
+        with:
+          registry: artifacts.developer.gov.bc.ca
+          username: ${{ env.ARTIFACTORY_USERNAME }}
+          password: ${{ env.ARTIFACTORY_PASSWORD }}
+      
+      - name: Docker Build and Push Nginx Image
+        working-directory: ${{env.WORKING_DIRECTORY}}
+        run: |
+          docker build -t artifacts.developer.gov.bc.ca/${{ env.ARTIFACTORY_REPO }}/nginx:${{ env.NGINX_VERSION }} .
+          docker push artifacts.developer.gov.bc.ca/${{ env.ARTIFACTORY_REPO }}/nginx:${{ env.NGINX_VERSION }}
+      
+      #   Run Vulnerability Scan usinig Trivy scanner
+      - name: Run Trivy vulnerability scanner
+        uses: aquasecurity/trivy-action@master
+        with:
+          scan-type: image
+          image-ref: artifacts.developer.gov.bc.ca/${{ env.ARTIFACTORY_REPO }}/nginx:${{ env.NGINX_VERSION }}
+          format: 'table'
+          ignore-unfixed: true
+          limit-severities-for-sarif: true
+          severity: HIGH,CRITICAL

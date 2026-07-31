@@ -1,0 +1,24 @@
+#!/bin/bash
+set -e
+
+echo "---> Running assemble"
+
+APP_ROOT=${APP_ROOT:-/opt/app-root}
+SRC_DIR=${HOME:-/opt/app-root/src}
+
+# S2I places application source in $SRC_DIR
+# We keep it there and let run script sync to nginx docroot.
+
+# If user provides nginx-cfg directory, copy configs into /etc/nginx/conf.d
+if [ -d "${SRC_DIR}/nginx-cfg" ]; then
+  echo "---> Found nginx-cfg/, copying to /etc/nginx/conf.d"
+  cp -v ${SRC_DIR}/nginx-cfg/* /etc/nginx/conf.d/ || true
+fi
+
+# Optional: if user has a 'public' or 'html' directory, we can normalize it
+if [ -d "${SRC_DIR}/public" ]; then
+  echo "---> Found public/, using as app root"
+  mv "${SRC_DIR}/public" "${SRC_DIR}/html"
+fi
+
+echo "---> Assemble complete"
