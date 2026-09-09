@@ -1,4 +1,4 @@
-FROM nginx:1.31.3
+FROM nginx:1.31.5
 
 USER root
 
@@ -23,6 +23,7 @@ RUN mkdir -p /run /var/cache/nginx /var/log/nginx && \
     chown -R 1001:0 /run /var/cache/nginx /var/log/nginx /etc/nginx /usr/share/nginx/html ${APP_ROOT} && \
     chmod -R g+rwX /run /var/cache/nginx /var/log/nginx /etc/nginx /usr/share/nginx/html ${APP_ROOT}
 
+COPY nginx/nginx-cfg/default.conf /etc/nginx/conf.d/default.conf
     # --- Remove "user nginx;" directive (OpenShift runs as non-root) ---
 RUN sed -i 's/^user/# user/' /etc/nginx/nginx.conf
 
@@ -34,5 +35,6 @@ WORKDIR ${HOME}
 
 # Arbitrary UID support for OpenShift
 USER 1001
+EXPOSE 8080
 
 CMD ["/usr/libexec/s2i/run"]
