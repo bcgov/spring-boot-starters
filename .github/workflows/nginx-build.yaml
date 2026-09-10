@@ -23,9 +23,13 @@ on:
           - nginx-jag-cdds
           - nginx-dps
           - nginx-carma
+      version:
+        description: 'Enter version'
+        required: true
+        type: string
 
 env:
-  NGINX_VERSION: 1.31.3
+  NGINX_VERSION: ${{ github.event.inputs.version }}
   IMAGE_NAME: ${{ github.event.inputs.project }}
   WORKING_DIRECTORY: ./nginx
 
