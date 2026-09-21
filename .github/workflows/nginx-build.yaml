@@ -23,6 +23,7 @@ on:
           - nginx-jag-cdds
           - nginx-dps
           - nginx-carma
+          - nginx-efax
       version:
         description: 'Enter version'
         required: true
