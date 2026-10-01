@@ -2,7 +2,10 @@ FROM nginx:1.31.5
 
 USER root
 
-RUN apt-get update
+RUN apt-get update && \
+    apt-get upgrade -y && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
 
 # S2I scripts location and app root
 ENV STI_SCRIPTS_PATH=/usr/libexec/s2i \
