@@ -13,14 +13,10 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
-        <spring-boot.version>3.5.14</spring-boot.version>
-        <spring-framework.version>6.2.19</spring-framework.version>
-        <jackson-bom.version>2.21.7</jackson-bom.version>
-        <jetty.version>12.0.36</jetty.version>
-        <spring-ws.version>4.1.4</spring-ws.version>
+        <spring-boot.version>4.1.2</spring-boot.version>
         <org.mapstruct.version>1.6.3</org.mapstruct.version>
         <log4j2.version>2.24.3</log4j2.version>
-        <org.apache.cxf.version>4.1.7</org.apache.cxf.version>
+        <org.apache.cxf.version>4.2.2</org.apache.cxf.version>
         
         <!-- automatically run annotation processors within the incremental compilation (Eclipse) -->
   		<m2e.apt.activation>jdt_apt</m2e.apt.activation>
@@ -38,7 +34,7 @@
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web-services</artifactId>
+            <artifactId>spring-boot-starter-webservices</artifactId>
             <exclusions>
                 <exclusion>
                     <groupId>org.springframework.boot</groupId>
@@ -94,41 +90,6 @@
 
     <dependencyManagement>
         <dependencies>
-            <!-- Security overrides (Trivy remediation). These MUST stay above the spring-boot-dependencies
-                 import: with import scope the first declaration wins, so they take precedence over Boot's
-                 managed versions. -->
-            <dependency>
-                <groupId>org.springframework</groupId>
-                <artifactId>spring-framework-bom</artifactId>
-                <version>${spring-framework.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-            <dependency>
-                <groupId>com.fasterxml.jackson</groupId>
-                <artifactId>jackson-bom</artifactId>
-                <version>${jackson-bom.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.eclipse.jetty</groupId>
-                <artifactId>jetty-bom</artifactId>
-                <version>${jetty.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.springframework.ws</groupId>
-                <artifactId>spring-ws-core</artifactId>
-                <version>${spring-ws.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.springframework.ws</groupId>
-                <artifactId>spring-xml</artifactId>
-                <version>${spring-ws.version}</version>
-            </dependency>
-
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-dependencies</artifactId>

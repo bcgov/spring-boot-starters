@@ -10,7 +10,7 @@
     <version>1.0.5</version>
 
     <properties>
-        <org.apache.cxf.version>4.1.7</org.apache.cxf.version>
+        <org.apache.cxf.version>4.2.2</org.apache.cxf.version>
         <org.apache.neethi.version>3.2.2</org.apache.neethi.version>
         <com.fasterxml.jackson.core.version>2.11.2</com.fasterxml.jackson.core.version>
         <javax.xml.bind.version>2.3.1</javax.xml.bind.version>

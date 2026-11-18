@@ -29,7 +29,7 @@ public class JschSessionProviderTest {
     @BeforeEach
     public void setUp() throws JSchException {
 
-        MockitoAnnotations.initMocks(this);
+        MockitoAnnotations.openMocks(this);
 
         SftpProperties sftpProperties = new SftpProperties();
         sftpProperties.setHost(HOST);
