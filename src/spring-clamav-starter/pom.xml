@@ -12,7 +12,8 @@
         <java.version>17</java.version>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
-        <spring-boot.version>3.5.4</spring-boot.version>
+        <spring-boot.version>3.5.14</spring-boot.version>
+        <spring-framework.version>6.2.19</spring-framework.version>
         <log4j2.version>2.24.3</log4j2.version>
     </properties>
 
@@ -52,6 +53,17 @@
 
     <dependencyManagement>
         <dependencies>
+            <!-- Security overrides (Trivy remediation). These MUST stay above the spring-boot-dependencies
+                 import: with import scope the first declaration wins, so they take precedence over Boot's
+                 managed versions. -->
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-framework-bom</artifactId>
+                <version>${spring-framework.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-dependencies</artifactId>
