@@ -7,13 +7,13 @@
 
     <groupId>ca.bc.gov.open</groupId>
     <artifactId>spring-sftp-starter</artifactId>
-    <version>1.0.5</version>
+    <version>1.0.6</version>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
-        <spring-boot.version>3.5.4</spring-boot.version>
+        <spring-boot.version>4.1.2</spring-boot.version>
         <log4j2.version>2.24.3</log4j2.version>
     </properties>
 
@@ -80,7 +80,7 @@
             <dependency>
                 <groupId>ca.bc.gov.open</groupId>
                 <artifactId>spring-starters-bom</artifactId>
-                <version>1.0.5</version>
+                <version>1.0.6</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>

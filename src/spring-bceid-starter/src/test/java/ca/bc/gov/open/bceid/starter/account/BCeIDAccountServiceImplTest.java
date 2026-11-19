@@ -53,7 +53,7 @@ public class BCeIDAccountServiceImplTest {
     @BeforeEach
     public void init() {
 
-        MockitoAnnotations.initMocks(this);
+        MockitoAnnotations.openMocks(this);
 
         Mockito.doReturn(createAccountDetailsResponse(ResponseCode.SUCCESS))
                 .when(bCeIDServiceSoapMock)

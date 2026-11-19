@@ -53,7 +53,7 @@ public class SftpServiceImplListFileTest {
     @BeforeEach
     public void setUp() throws JSchException, SftpException {
 
-        MockitoAnnotations.initMocks(this);
+        MockitoAnnotations.openMocks(this);
 
         Mockito.when(sessionMock.openChannel(Mockito.eq("sftp"))).thenReturn(channelSftpMock);
         Mockito.when(jschSessionProviderMock.getSession()).thenReturn(sessionMock);

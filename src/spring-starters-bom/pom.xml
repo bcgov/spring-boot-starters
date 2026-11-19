@@ -7,10 +7,11 @@
 
     <groupId>ca.bc.gov.open</groupId>
     <artifactId>spring-starters-bom</artifactId>
-    <version>1.0.5</version>
+    <version>1.0.6</version>
 
     <properties>
-        <org.apache.cxf.version>4.1.3</org.apache.cxf.version>
+        <org.apache.cxf.version>4.2.2</org.apache.cxf.version>
+        <org.apache.neethi.version>3.2.2</org.apache.neethi.version>
         <com.fasterxml.jackson.core.version>2.11.2</com.fasterxml.jackson.core.version>
         <javax.xml.bind.version>2.3.1</javax.xml.bind.version>
         <commons.io.version>2.18.0</commons.io.version>
@@ -54,6 +55,13 @@
                 <artifactId>cxf-rt-transports-http-jetty</artifactId>
                 <version>${org.apache.cxf.version}</version>
             </dependency>
+            <!-- neethi: transitive of CXF, pinned for CVE-2026-42402 / CVE-2026-42403 -->
+            <dependency>
+                <groupId>org.apache.neethi</groupId>
+                <artifactId>neethi</artifactId>
+                <version>${org.apache.neethi.version}</version>
+            </dependency>
+
             <dependency>
                 <groupId>javax.xml.bind</groupId>
                 <artifactId>jaxb-api</artifactId>
